@@ -1,116 +1,4 @@
-// import React, { useState, useEffect, useRef } from "react";
-
-// export default function SquidGame() {
-//   const [isPlaying, setIsPlaying] = useState(false);
-//   const [light, setLight] = useState<"red" | "green">("red");
-//   const [progress, setProgress] = useState(0);
-//   const [result, setResult] = useState<"win" | "lose" | null>(null);
-
-//   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-//   const startGame = () => {
-//     setIsPlaying(true);
-//     setProgress(0);
-//     setResult(null);
-//     switchLight();
-//   };
-
-//   const stopGame = (status: "win" | "lose") => {
-//     setIsPlaying(false);
-//     setResult(status);
-//     if (intervalRef.current) clearTimeout(intervalRef.current);
-//   };
-
-//   const switchLight = () => {
-//     setLight(Math.random() < 0.5 ? "red" : "green");
-//     const timeout = Math.floor(500 + Math.random() * 500);
-//     intervalRef.current = setTimeout(switchLight, timeout);
-//   };
-
-//   const handleMove = () => {
-//     if (!isPlaying || result) return;
-
-//     if (light === "green") {
-//       setProgress((prev) => Math.min(prev + 10, 100));
-//     } else {
-//       stopGame("lose");
-//     }
-//   };
-
-//   useEffect(() => {
-//     if (progress >= 100 && isPlaying) {
-//       stopGame("win");
-//     }
-//   }, [progress, isPlaying]);
-
-//   useEffect(() => {
-//     return () => {
-//       if (intervalRef.current) clearTimeout(intervalRef.current);
-//     };
-//   }, []);
-
-//   return (
-//     <div style={{ textAlign: "center", padding: "20px" }}>
-//       <h1>Squid Game: Red Light Green Light</h1>
-
-//       {!isPlaying && !result && (
-//         <button onClick={startGame} style={{ padding: "10px 20px", marginTop: "20px" }}>
-//           Play
-//         </button>
-//       )}
-
-//       {isPlaying && (
-//         <>
-//           <div
-//             style={{
-//               width: "80px",
-//               height: "80px",
-//               borderRadius: "50%",
-//               margin: "20px auto",
-//               backgroundColor: light === "red" ? "red" : "green",
-//             }}
-//           />
-//           <button onClick={handleMove} style={{ padding: "10px 20px", margin: "10px" }}>
-//             Move
-//           </button>
-//           <div
-//             style={{
-//               width: "300px",
-//               height: "20px",
-//               background: "#ddd",
-//               borderRadius: "10px",
-//               margin: "20px auto",
-//               overflow: "hidden",
-//             }}
-//           >
-//             <div
-//               style={{
-//                 height: "100%",
-//                 width: `${progress}%`,
-//                 background: "green",
-//                 transition: "width 0.3s",
-//               }}
-//             />
-//           </div>
-//           <p>Progress: {progress}%</p>
-//         </>
-//       )}
-
-//       {result && (
-//         <div>
-//           <p style={{ fontWeight: "bold", fontSize: "18px", color: result === "win" ? "green" : "red" }}>
-//             {result === "win" ? "🎉 You Win!" : "💀 You Lose!"}
-//           </p>
-//           <button onClick={startGame} style={{ padding: "10px 20px", marginTop: "10px" }}>
-//             Play Again
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function SquidGame() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -118,7 +6,7 @@ export default function SquidGame() {
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState<"win" | "lose" | null>(null);
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<number | null>(null);
 
   const startGame = () => {
     setIsPlaying(true);
